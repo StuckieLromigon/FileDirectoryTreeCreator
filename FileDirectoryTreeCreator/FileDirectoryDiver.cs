@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
+using System.Windows;
 
 namespace FileDirectoryTreeCreator
 {
@@ -28,7 +30,7 @@ namespace FileDirectoryTreeCreator
 
         private void DiveInForDirectoryData(DirectoryNode currentNodeToFill, DirectoryInfo currentDirectory, int DeepLevel)
         {
-            //Good old crutch, i simply don't know how to view access restrictions
+            //Good old crutch, i simply don't know how to set required priviliges level
             FileInfo[] infoFiles;
             try
             {
@@ -36,6 +38,12 @@ namespace FileDirectoryTreeCreator
             }
             catch(UnauthorizedAccessException)
             {
+                //var exeName = Process.GetCurrentProcess().MainModule.FileName;
+                //ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
+                //startInfo.Verb = "runas";
+                //Process.Start(startInfo);
+                //Console.WriteLine("Need to restart with admin priviliges");
+                //Environment.Exit(1);
                 return;
             }
             currentNodeToFill.Name = currentDirectory.Name;
